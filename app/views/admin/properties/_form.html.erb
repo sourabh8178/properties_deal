@@ -1,0 +1,109 @@
+<div class="row" style="margin:20px">
+  <div class="col-md-12">
+    <div class="card card-plain">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title mt-0">Property</h4>
+      </div>
+      <div class="card-body">
+        <%= form_for([:admin, @property]) do |form| %>
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating"> Name</label>
+           <%= form.text_field :name, class: "form-control",id: "exampleInput1"%>
+          </div><br>
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating"> amenities</label>
+           <%= form.text_field :amenities, class: "form-control",id: "exampleInput1" %>
+          </div><br>
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating"> size</label>
+           <%= form.text_field :size, class: "form-control",id: "exampleInput1" %>
+          </div><br>
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating">Price</label>
+           <%= form.text_field :price, class: "form-control",id: "exampleInput1" %>
+          </div><br>
+
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating">Bedrooms</label>
+           <%= form.select :bedrooms, [['1','1'],['2','2'],['3','3']],{:prompt => '--  Select Bedroom Numbers --'} , class: "form-control",id: "exampleInput1" %>
+          </div><br>
+
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating">Bathrooms</label>
+           <%= form.select :bathrooms, [['1','1'],['2','2'],['3','3']],{:prompt => '-- Select Bathroom Numbers --'}, class: "form-control",id: "exampleInput1" %>
+          </div><br>
+
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating">Parking</label>
+           <%= form.select :parking, [['1','1'],['2','2'],['3','3']],{:prompt => '--  Select Parking Numbers --'}, class: "form-control",id: "exampleInput1" %>
+          </div><br>
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating">Agent</label>
+           <%= form.select :user_id, User.agents.map{ |u| [u.email, u.id ]}, {:prompt => '--  Select Agent --'}, class: "form-control" %>
+          </div><br>
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating">Status type</label>   
+           <%= form.select :status_type, Property.all.map{ |st| [st[0], st[1]]}, {:prompt => '--  Select Agent --'}, class: "form-control" %>
+          </div><br>
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating"> Description</label>
+           <%= form.text_field :description, class: "form-control",id: "exampleInput1" %>
+          </div><br>
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating">Property type </label>
+           <%= form.select :property_type, [['RESIDENTIAL PLOTS','RESIDENTIAL PLOTS'],['RESIDENTIAL BUILDINGS','RESIDENTIAL BUILDINGS'],['COMMERCIAL','COMMERCIAL']],{:prompt => '--  Select Property type --'}, class: "form-control" %>
+          </div><br>
+          
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating"> Location</label>
+           <%= form.select :location, [["Bairagarh", "Bairagarh"], ["Berasia Road", "Berasia Road"], ["Bittan Market", "Bittan Market"], ["Habib Gan", "Habib Gan"], ["Hamidia Road", "Hamidia Road"], ["Hari Ganga Nagar", "Hari Ganga Nagar"], ["Bangrasia", "Bangrasia"], ["Katara", "Katara"], ["Badwai", "Badwai"]],{:prompt => '--  Select Location --'}, class: "form-control", id: "exampleInput1" %>
+          </div><br>
+
+          <div>
+            <%= form.label :imgage %>
+            <% if form.object.new_record? %>
+              <%= form.file_field :images, multiple: true %>
+            <% else %>
+              <%= form.file_field :images, multiple: true %>
+            <% end %>
+          </div><br>
+          
+         <%= form.submit class: "btn btn-primary w-100" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="error-message" style="color: red; display: none;">Please select an option.</div>
+
+<script type="text/javascript">
+  document.getElementById("myForm").addEventListener("submit", function(event) {
+  var selectElement = document.getElementById("my_select");
+  if (!selectElement.value) {
+    event.preventDefault(); // Prevent form submission
+    document.getElementById("error-message").style.display = "block"; // Show error message
+  } else {
+    document.getElementById("error-message").style.display = "none"; // Hide error message
+  }
+});
+</script>
+<style type="text/css">
+  .btn-primary,
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-primary:visited,
+  .btn-primary:focus {
+      background-color: #2e8c6e;
+      border-color: #2e8c6e;
+  }
+</style>

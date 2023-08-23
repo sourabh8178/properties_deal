@@ -1,0 +1,87 @@
+<div class="icon-boxes position-relative">
+    <div class="container position-relative">
+      <div class="row gy-4 mt-5">
+
+        <form action="/view_all_property" class="d-flex justify-content-around">
+          <div class="col-xl-3 col-md-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box">
+              <h4 class="text-white" style="text-align:center;">Status</h4>
+              <select class="form-select" name="status">
+              		<option value="" selected>status</option>
+                  <option value="">For Rent</option>
+                  <option value="">For Sale</option>
+              </select>
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-3" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <h4 class="text-white" style="text-align:center;">Property Type</h4>
+              <select class="form-select", name="property">
+                <option value="" selected>Choose a type</option>
+                <option value="RESIDENTIAL PLOTS">RESIDENTIAL PLOTS</option>
+                <option value="RESIDENTIAL BUILDINGS">RESIDENTIAL BUILDINGS</option>
+                <option value="COMMERCIAL">COMMERCIAL</option>
+              </select>
+              <!-- <div class="icon"><i class="bi bi-gem"></i></div>
+              <h4 class="title"><a href="" class="stretched-link">Sed ut perspiciatis</a></h4> -->
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-3" data-aos="fade-up" data-aos-delay="300">
+            <div class="icon-box">
+              <h4 class="text-white" style="text-align:center;">Location</h4>
+              <select class="form-select" name="location">
+                <option value="" selected>Choose a location</option>
+                <option value="noida">noida</option>
+                <option value="gzb">gzb</option>
+                <option value="Bairagarh">Bairagarh</option>
+                <option value="Berasia Road">Berasia Road</option>
+                <option value="Bittan Market">Bittan Market</option>
+                <option value="Habib Ganj">Habib Ganj</option>
+                <option value="Hamidia Road">Hamidia Road</option>
+                <option value="Hari Ganga Nagar">Hari Ganga Nagar</option>
+                <option value="Bangrasia">Bangrasia</option>
+                <option value="Katara">Katara</option>
+                <option value="Badwai">Badwai</option>
+              </select>
+            </div>
+          </div><!--End Icon Box -->
+
+          <!-- <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="500">
+            <div class="icon-box">
+              <h4 class="text-white"><span>Price Range &#8377;
+              <div class="price" >0</div></span></h4>
+              <input class="range-slider__range" type="range" name="rangeValue" value="0" min="0" max="10000000" id="customRange3" step="10000">
+            </div>
+          </div> -->
+          <!--End Icon Box -->
+
+          <div class="col-xl-2 col-md-3" data-aos="fade-up" data-aos-delay="500">
+            <div class="icon-box" style="text-align:center;">
+              <h4 class="text-white" style="text-align:center;">Search</h4>
+              <button class="btn btn-warning" >click here</button>
+            </div>
+          </div><!--End Icon Box -->
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<style type="text/css">
+	.range-slider__range{
+		background-color: #2e8c6e;
+		color: #2e8c6e!important;
+	}
+</style>
+<script>
+  $( document ).ready(function() {
+        $('#customRange3').on('input', function(){
+  				debugger
+             v = $('#customRange3').val();
+             console.log(v);
+             $('div.price').text(v);
+        });
+    });
+</script>

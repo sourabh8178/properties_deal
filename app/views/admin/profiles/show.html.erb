@@ -1,0 +1,44 @@
+<div style="text-align:center;">
+<h2><%#= @profile.name %> Profile</h2>
+<div>
+
+	<p>
+			<%= image_tag @profile&.profile_image, style: "width: 100px; height: 94px; " %>
+	</p>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @profile.name %>
+  </p>
+
+  <p>
+    <strong>email:</strong>
+    <%= @profile.user.email %>
+  </p>
+
+  <p>
+    <strong>Mobile Number:</strong>
+    <%= @profile.mobile_number %>
+  </p>
+
+  <p>
+    <strong>About:</strong>
+    <%= @profile.about %>
+  </p>
+
+  <p>
+    <strong>Complete:</strong>
+    <%= @profile.is_complete %>
+  </p>
+
+</div>
+
+<%= link_to "back", admin_profiles_path, class: "btn btn-warning" %>
+</div>
+<br>
+
+<style >
+	.btn-warning{
+	width: 262px;
+}
+</style>

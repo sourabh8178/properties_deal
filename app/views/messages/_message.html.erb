@@ -1,0 +1,30 @@
+<div class="message my-message">
+	<img alt class="img-circle medium-image" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+	<%#= image_tag message&.user&.profile&.profile_image, class:"img-circle medium-image"%>
+	<div class="message-body">
+	<div class="message-body-inner">
+	<div class="message-info">
+	<h4> <%= message.user&.profile&.name&.capitalize %> </h4>
+	<h5> <i class="fa fa-clock-o"></i> <%= message.created_at.strftime("%I:%M %p") %> </h5>
+	</div>
+	<hr>
+	<div class="message-text">
+	<%= message.content %>
+	</div>
+	</div>
+	</div>
+	<br>
+</div>
+
+<script>
+  // const messageContainer = document.getElementById('my-message');
+	// messageContainer.scrollTop = messageContainer.scrollHeight;
+	
+
+	$(document).ready(function() {
+    const newNameInput = document.getElementById("chat-text");
+    const name = newNameInput.value;
+    newNameInput.value = "";
+  });
+  
+</script>

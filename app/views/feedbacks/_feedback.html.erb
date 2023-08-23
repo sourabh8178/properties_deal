@@ -1,0 +1,27 @@
+<div id="comment-1" class="comment">
+  <div class="d-flex">
+    <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt=""></div>
+    <div>
+      <h5><%= feedback.name %></a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</h5>
+      <time datetime="2020-01-01"><%= convert_time(feedback.created_at) %></time>
+      <p>
+        <%= feedback.message %>.
+      </p>
+    </div>
+  </div>
+</div>
+<script >
+
+    $(document).ready(function() {
+      debugger
+     newNameInput = document.getElementById("chat-name");
+     newNameInput2 = document.getElementById("chat-email");
+     newNameInput3 = document.getElementById("chat-message");
+     name = newNameInput.value;
+     name2 = newNameInput2.value;
+     name3 = newNameInput3.value;
+    newNameInput.value = "";
+    newNameInput2.value = "";
+    newNameInput3.value = "";
+  });
+</script>

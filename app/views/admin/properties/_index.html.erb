@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-plain">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title mt-0">Properties<span>&nbsp;<%= link_to "Add New Property", new_admin_property_path, class: "btn btn-btn" %></span></h4>
+          <input placeholder='search by name' id="search_profile" onkeyup="myFunction()" type='text' style="border-radius: 7px;">
+          <button class='btn btn-btn'>
+            <i class="bi bi-search"></i>
+          </button>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover">
+					  <thead class="">
+					  	<th>ID</th>
+					    <th>Name</th>
+							<th>amenities</th>
+							<th>size</th>
+							<th>price</th>
+							<th>Description</th>
+							<th>location</th>
+							<th colspan="3">Action</th>             
+					  </thead>
+					  <tbody id="mytable">
+					    <% @properties.each do |prop| %>
+								<tr>
+									<td><%= prop.id %></td>
+									<td><%= prop.name %></td>
+									<td><%= prop.amenities %></td>
+									<td><%= prop.size %></td>
+									<td><%= prop.price %></td>
+									<td><%= prop.description %></td>
+									<td><%= prop.location%></td>
+									<td><%= link_to "show", admin_property_path(prop), class: "btn btn-info" %></td>
+									<td><%= link_to "Edit", edit_admin_property_path(prop), class: "btn btn-warning" %></td>			
+						      <td><%= button_to 'Destroy', admin_property_path(prop), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+								</tr>
+							<% end %>
+					  </tbody>
+					</table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style type="text/css">
+  .btn-btn,
+  .btn-btn:hover,
+  .btn-btn:active,
+  .btn-btn:visited,
+  .btn-btn:focus {
+      background-color: #2e8c6e;
+      border-color: #2e8c6e;
+      color: white;
+  }
+</style>
+<script>
+	function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("search_profile");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("mytable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+</script>

@@ -1,0 +1,75 @@
+<div class="row" style="margin:20px;">
+  <div class="col-md-12">
+    <div class="card card-plain">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title mt-0">New Profile</h4>
+      </div>
+      <div class="card-body">
+        <%= form_for([:admin, @profile]) do |form| %>
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating">Name*</label>
+           <%= form.text_field :name, class: "form-control",id: "exampleInput1", required: true%>
+          </div><br>
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating">Number*</label>
+           <%= form.text_field :mobile_number, class: "form-control",id: "exampleInput1", required: true %>
+          </div><br>
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating"> Address*</label>
+           <%= form.text_field :address, class: "form-control",id: "exampleInput1", required: true %>
+          </div><br>
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating">Complete</label>
+           <%= form.check_box :is_complete, id: "exampleInput1" %>
+          </div><br>
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating">Agent*</label>   
+           <%= form.select :user_id, @users.map{ |u| [u.email, u.id ]}, {:prompt => '--  Select Agent --'}, class: "form-control", required: true %>
+          </div><br>
+
+          <div class="form-group">
+           <label for="exampleInput1" class="bmd-label-floating"> About* <p id="word-count">Words left: 255</p></label>
+           <%= form.text_area :about, class: "form-control",id: "exampleInput1", required: true, maxlength:"255" %>
+          </div><br><br>
+
+          <div>
+            <%= form.label :image %>
+            <%= form.file_field :profile_image, required: true %>
+          </div><br>
+          
+         <%= form.submit class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="error-message" style="color: red; display: none;">Please select an option.</div>
+
+<script type="text/javascript">
+  document.getElementById("myForm").addEventListener("submit", function(event) {
+  var selectElement = document.getElementById("my_select");
+  if (!selectElement.value) {
+    event.preventDefault(); // Prevent form submission
+    document.getElementById("error-message").style.display = "block"; // Show error message
+  } else {
+    document.getElementById("error-message").style.display = "none"; // Hide error message
+  }
+});
+
+</script>
+<style >
+  .btn-primary,
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-primary:visited,
+  .btn-primary:focus {
+      background-color: #2e8c6e;
+      border-color: #2e8c6e;
+      width: 100%;
+  }
+</style>
