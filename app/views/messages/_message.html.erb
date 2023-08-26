@@ -1,30 +1,17 @@
-<div class="message my-message">
-	<img alt class="img-circle medium-image" src="https://bootdey.com/img/Content/avatar/avatar1.png">
-	<%#= image_tag message&.user&.profile&.profile_image, class:"img-circle medium-image"%>
-	<div class="message-body">
-	<div class="message-body-inner">
-	<div class="message-info">
-	<h4> <%= message.user&.profile&.name&.capitalize %> </h4>
-	<h5> <i class="fa fa-clock-o"></i> <%= message.created_at.strftime("%I:%M %p") %> </h5>
-	</div>
-	<hr>
-	<div class="message-text">
-	<%= message.content %>
-	</div>
-	</div>
-	</div>
-	<br>
+<div class="cont-<%= message.user.id %>">
+  <div class="message-box msg-<%= message.user.id %> ">
+    <%= message.content %></br><span class="time_date"><%= message.created_at.strftime("%I:%M %p") %> | <%= message.created_at.strftime("%d, %b") %>
+  </div>
 </div>
 
-<script>
-  // const messageContainer = document.getElementById('my-message');
-	// messageContainer.scrollTop = messageContainer.scrollHeight;
-	
 
-	$(document).ready(function() {
+<script>
+  $(document).ready(function() {
     const newNameInput = document.getElementById("chat-text");
     const name = newNameInput.value;
     newNameInput.value = "";
+    const messageContainer = document.getElementById('message-container');
+		messageContainer.scrollTop = messageContainer.scrollHeight;
   });
   
 </script>

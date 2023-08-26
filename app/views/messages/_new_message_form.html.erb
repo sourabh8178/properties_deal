@@ -1,6 +1,9 @@
-<div class="form-group msg-form">
-  <%= form_with(model: [@single_room ,@message], remote: true, class: "d-flex" ) do |f| %>
-    <%= f.text_field :content, id: 'chat-text', class: "form-control msg-content", autocomplete: 'off' %>
-    <%= f.submit data: { disable_with: false }, class: "btn btn-primary" %>
-  <% end %>
+<div class="type_msg">
+  <div class="input_msg_write">
+    <%= form_with(model: [@single_room ,@message], remote: true, class: "d-flex" ) do |f| %>
+      <%= f.text_field :content, id: 'chat-text', class: "write_msg", autocomplete: 'off', placeholder:"Type a message" %>
+      <!-- <%#= f.submit data: { disable_with: false }, class: "msg_send_btn", type:"button" %><i class="fa fa-paper-plane" aria-hidden="true"></i> -->
+      <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+    <% end %>
+  </div>
 </div>

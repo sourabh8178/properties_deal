@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   def index
     @current_user = current_user
     redirect_to '/signin' unless @current_user
-    sender_ids = Room.where(user_id: 1).map(&:sender_id)
+    sender_ids = Room.where(user_id: current_user.id).map(&:sender_id)
     @users = User.where(id: sender_ids)
     @room = Room.new
   end
@@ -11,7 +11,7 @@ class RoomsController < ApplicationController
     @chat_user = User.find_by(id: params[:sender_id].to_i)
     @current_user = current_user
     @single_room = Room.find(params[:id])
-    sender_ids = Room.where(user_id: 1).map(&:sender_id)
+    sender_ids = Room.where(user_id: current_user.id).map(&:sender_id)
     @users = User.where(id: sender_ids)
     @room = Room.new
     @message = Message.new

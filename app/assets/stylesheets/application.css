@@ -12,7 +12,6 @@
  *
  *= require_tree .
  *= require_self
- *= require active_admin
  *= require css/main
  *= require vendor/aos/aos.css
  *= require vendor/glightbox/css/glightbox
