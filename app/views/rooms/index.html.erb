@@ -13,22 +13,22 @@
    <div class="inbox_people">
      <div class="headind_srch">
       <div class="recent_heading">
-        <h4><%= current_user.email%></h4>
+        <h4><%= current_user.profile.name.capitalize %></h4>
       </div>
       <div class="srch_bar">
         <div class="stylish-input-group">
-         <input type="text" class="search-bar"  placeholder="Search" >
+         <input type="text" class="search-bar" id="myInput" onkeyup="searchUsers()"  placeholder="Search" >
          </div>
       </div>
      </div>
-    <div class="inbox_chat scroll">
+    <div class="inbox_chat scroll" >
     <% @users.each do |user| %>
       <%= link_to user_chat_path(sender_id: user.id) do %>
         <div class="chat_list active_chat">
-          <div class="chat_people">
-           <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-           <div class="chat_ib">
-             <h5><%= user.profile.name %> <span class="chat_date">Dec 25</span></h5>
+          <div class="chat_people" id="name_search">
+           <div class="chat_img"><%= image_tag user.profile.profile_image %> </div>
+           <div class="chat_ib" id="user-name">
+             <h5 ><%= user.profile.name %> <span class="chat_date">Dec 25</span></h5>
              <p>Test, which is a new approach to have all solutions 
               astrology under one roof.</p>
            </div>
@@ -38,9 +38,9 @@
     <% end %>
     </div>
   </div>
+    <% if @single_room %>
     <div class="mesgs">
      <div class="msg_history">
-      <% if @single_room %>
         <%= turbo_stream_from @single_room %>
         <% @single_room.messages.group_by {|u| u.created_at.strftime("%a, %d %b %Y")}.each do |messages| %>
           <p class="messagrdate" style="text-align: center;"><%= messages.first %></p>
@@ -55,20 +55,20 @@
           <% end %>
         <% end %>
         <div id="messages"></div>
-      <% end %>
      </div>
      <%= render partial: 'messages/new_message_form' %>
-     <!-- <div class="type_msg">
-      <div class="input_msg_write">
-        <input type="text" class="write_msg" placeholder="Type a message" />
-        <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+      <% else %>
+      <div class="mesgs">
+        <div class="non_message">
+          <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" height="117px"><spam class="profile_message">
+          Welcome!
+          <%= current_user.profile.name.capitalize %></spam>
+        </div>
       </div>
-     </div> -->
+      <% end %>
     </div>
   </div>
 </div>
-
-
 
 <style>
    /*---------chat window---------------*/
@@ -87,6 +87,10 @@
 .container{
     max-width:900px;
 }
+.profile_message{
+  margin-left: 30px;
+  font-size: 32px;
+}
 .inbox_people {
    background: #fff;
    float: left;
@@ -96,7 +100,7 @@
 }
 
 .inbox_msg {
-   border: 1px solid #ddd;
+   border: 8px solid #2c856c;
    clear: both;
    overflow: hidden;
 }
@@ -299,9 +303,6 @@
    width: 33px;
 }
 
-.messaging {
-   padding: 0 0 50px 0;
-}
 
 .msg_history {
    height: 516px;
@@ -311,4 +312,19 @@
 <script>
   const messageContainer = document.getElementById('message-container');
   messageContainer.scrollTop = messageContainer.scrollHeight;
+
+  function searchUsers() {
+  const input = document.getElementById("myInput");
+  const filter = input.value.toLowerCase();
+  const names = document.querySelectorAll("#user-name");
+
+  names.forEach(name => {
+    const userText = name.textContent || name.innerText;
+    if (userText.toLowerCase().indexOf(filter) > -1) {
+      name.parentElement.parentElement.style.display = "";
+    } else {
+      name.parentElement.parentElement.style.display = "none";
+    }
+  });
+}
 </script>
