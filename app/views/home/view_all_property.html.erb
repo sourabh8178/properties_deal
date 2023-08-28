@@ -27,6 +27,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="row gy-4 posts-list">
+        <% if @properties.present? %>
         	<% @properties.each do |property|%>
 	          <div class="col-xl-4 col-md-6">
 	            <article>
@@ -62,13 +63,19 @@
 	            </article>
 	          </div><!-- End post list item -->
 	        <% end %>
+	      <% end %>
         </div><!-- End blog posts list -->
-
+				<div class=”col-lg-4 col-md-4 col-sm-5 col-xs-6 pagination-info”>
+				<span class=”pull-right”><%= page_entries_info(@properties) %></span>
+				</div>
         <div class="blog-pagination">
           <ul class="justify-content-center">
-            <li><a href="#">1</a></li>
-            <li class="active"><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
+            <%= will_paginate @properties,
+							 	:previous_label => '&laquo;',
+							  :next_label => '&raquo;',
+							  :class=>'small-font',
+							  :outer_window => 1,
+							  :inner_window => 0 %>
           </ul>
         </div><!-- End blog pagination -->
 

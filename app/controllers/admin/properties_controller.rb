@@ -1,7 +1,7 @@
 class Admin::PropertiesController < ApplicationController
 	before_action :set_property, only: %i[ show edit update destroy ]
 	def index
-		@properties = Property.all
+		@properties = Property.all.paginate(:page => params[:page], :per_page => 10)
 	end
 
 	def new
@@ -15,7 +15,6 @@ class Admin::PropertiesController < ApplicationController
 	end
 
 	def create
-		debugger 
 		@property = Property.new(property_params)
 		@property.status_type = params[:property][:status_type].to_i
 		@property.user_id = params[:property][:user_id].to_i

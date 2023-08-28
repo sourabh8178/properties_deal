@@ -43,7 +43,19 @@
     </div>
   </div>
 </div>
-
+<div class=”col-lg-4 col-md-4 col-sm-5 col-xs-6 pagination-info”>
+<span class=”pull-right”><%= page_entries_info(@properties) %></span>
+</div>
+<div class="blog-pagination">
+  <ul class="justify-content-center">
+    <%= will_paginate @properties,
+        :previous_label => '&laquo;',
+        :next_label => '&raquo;',
+        :class=>'small-font',
+        :outer_window => 1,
+        :inner_window => 0 %>
+  </ul>
+</div>
 <style type="text/css">
   .btn-btn,
   .btn-btn:hover,

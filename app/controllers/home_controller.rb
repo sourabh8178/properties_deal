@@ -18,18 +18,6 @@ class HomeController < ApplicationController
 
   def index
     @properties = Property.order('RANDOM()').limit(6)
-    # if (params[:rangeValue].to_i > 0 && params[:rangeValue].present?)
-    #   @properties = @properties.where('price < ?', params[:rangeValue].to_i)
-    # end
-    # if params[:bedrooms].present?
-    #   @properties = @properties.where(bedrooms: params[:bedrooms])
-    # end
-    # if params[:bathrooms].present?
-    #   @properties = @properties.where(bathrooms: params[:bathrooms])
-    # end
-    # if params[:location].present?
-    #   @properties = @properties.where(location: params[:location])
-    # end
     @agents = User.agents
     # @posts = Post.all
   end
@@ -50,7 +38,15 @@ class HomeController < ApplicationController
   end
 
   def view_all_property
-    @properties = Property.all
+
+    conditions = {}
+    conditions[:status] = params[:status ] if params[:status ].present?
+    conditions[:property_type] = params[:property] if params[:property].present?
+    conditions[:location] = params[:location] if params[:location].present?
+    @properties = Property.where(conditions).paginate(:page => params[:page], :per_page => 10)
+    if (params[:rangeValue].to_i > 0 && params[:rangeValue].present?)
+      @properties = @properties.where('price < ?', params[:rangeValue].to_i)
+    end
   end
 
   def agent_list

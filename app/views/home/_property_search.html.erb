@@ -48,18 +48,18 @@
             </div>
           </div><!--End Icon Box -->
 
-          <!-- <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="500">
+          <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="500">
             <div class="icon-box">
-              <h4 class="text-white"><span>Price Range &#8377;
-              <div class="price" >0</div></span></h4>
+              <h4 class="text-white"><span>Price
+              <div class="price" > 0</div></span></h4>
               <input class="range-slider__range" type="range" name="rangeValue" value="0" min="0" max="10000000" id="customRange3" step="10000">
             </div>
-          </div> -->
+          </div>
           <!--End Icon Box -->
 
           <div class="col-xl-2 col-md-3" data-aos="fade-up" data-aos-delay="500">
             <div class="icon-box" style="text-align:center;">
-              <h4 class="text-white" style="text-align:center;">Search</h4>
+              <h4 class="text-white" style="text-align:center;"></h4>
               <button class="btn btn-warning" >click here</button>
             </div>
           </div><!--End Icon Box -->
@@ -78,7 +78,6 @@
 <script>
   $( document ).ready(function() {
         $('#customRange3').on('input', function(){
-  				debugger
              v = $('#customRange3').val();
              console.log(v);
              $('div.price').text(v);
