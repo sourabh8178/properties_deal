@@ -38,7 +38,6 @@ class HomeController < ApplicationController
   end
 
   def view_all_property
-
     conditions = {}
     conditions[:status] = params[:status ] if params[:status ].present?
     conditions[:property_type] = params[:property] if params[:property].present?
@@ -65,5 +64,27 @@ class HomeController < ApplicationController
       @single_room = Room.create(user_id: current_user.id, sender_id: params[:agent_id].to_i)
       redirect_to "/rooms/#{@single_room.id}"
     end
+  end
+
+  def profile
+    @profile = current_user.profile
+  end
+
+  def update_profile
+    if current_user.profile.update(profile_params)
+      redirect_to(request.referer)
+    end
+  end
+
+  def profile_about
+  end
+
+  def security
+  end
+
+  private
+
+  def profile_params
+    params.require(:profile).permit(:name,:profile_image, :email, :mobile_number, :address, :location, :property_type, :bedrooms, :bathrooms, :parking, :images)
   end
 end

@@ -22,7 +22,8 @@ class Admin::ProfilesController < ApplicationController
 	def create
 		@profile = Profile.new(property_params)
 		if @profile.save
-			redirect_to admin_profile_path(@profile)
+			flash[:notice] = "Your Property Has Created."
+			redirect_to admin_profiles_path
 		else
       render :new, status: :unprocessable_entity
 		end
@@ -41,7 +42,8 @@ class Admin::ProfilesController < ApplicationController
 	def update
 		@profile.update(property_params)
 		if @profile.save
-			redirect_to admin_profile_path(@profile)
+			flash[:notice] = "Your Property Has Updated."
+			redirect_to admin_profiles_path
 		else
 			render :edit, status: :unprocessable_entity
 		end

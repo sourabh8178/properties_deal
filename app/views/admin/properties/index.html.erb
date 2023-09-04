@@ -1,1 +1,28 @@
+<% if flash[:notice].present? %>
+<div class="alert alert-success d-flex align-items-center" role="alert">
+  <i class="bi bi-check-circle-fill"></i>
+  <div>
+    <%= flash[:notice] %>
+  </div>
+</div>
+<% end %>
 <%= render partial: "admin/properties/index" %>
+<style >
+	.alert{
+		top: 6px;
+    width: 38%;
+    left: 61%;
+	}
+</style>
+
+<script>
+	$(document).ready(function() {
+  var myDiv = $('.alert-success');
+
+  if (myDiv.length) {
+    setTimeout(function() {
+      myDiv.hide();
+    }, 3000);
+  }
+});
+</script>

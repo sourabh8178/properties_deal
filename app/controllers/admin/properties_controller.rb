@@ -19,8 +19,9 @@ class Admin::PropertiesController < ApplicationController
 		@property.status_type = params[:property][:status_type].to_i
 		@property.user_id = params[:property][:user_id].to_i
     if @property.save
-    	 @property.update(images: params[:property][:images].compact_blank)
-      redirect_to admin_property_path(@property)
+			@property.update(images: params[:property][:images].compact_blank)
+			flash[:notice] = "Your Property Has Been Created."
+			redirect_to admin_properties_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,7 +35,8 @@ class Admin::PropertiesController < ApplicationController
     		@property.update(images: params[:property][:images])
     		# @property.images.attached(params[:property][:images])
     	end
-      redirect_to  admin_property_path(@property)
+			flash[:notice] = "Your Property Has Been Updated."
+      redirect_to  admin_properties_path
     else
       render :edit, status: :unprocessable_entity
     end

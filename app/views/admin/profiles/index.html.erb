@@ -1,4 +1,13 @@
 <%#= render partial: "admin/profiles/index", profiles: @profiles %>
+
+<% if flash[:notice].present? %>
+<div class="alert alert-success d-flex align-items-center" role="alert">
+  <i class="bi bi-check-circle-fill"></i>
+  <div>
+    <%= flash[:notice] %>
+  </div>
+</div>
+<% end %>
 <div class="row">
   <div class="col-md-12">
     <div class="card card-plain">
@@ -66,6 +75,11 @@
       border-color: #2e8c6e;
       color: white;
   }
+  .alert{
+    top: 6px;
+    width: 38%;
+    left: 61%;
+  }
 
 </style>
 
@@ -88,4 +102,13 @@
       }       
     }
   }
+    $(document).ready(function() {
+      var myDiv = $('.alert');
+
+      if (myDiv.length) {
+        setTimeout(function() {
+          myDiv.hide();
+        }, 3000);
+      }
+    });
 </script>
