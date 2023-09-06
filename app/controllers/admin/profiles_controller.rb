@@ -30,13 +30,13 @@ class Admin::ProfilesController < ApplicationController
 	end
 
 	def edit
-		user = User.all
-		@users = []
-		user.each do |agent|
-			if !agent.profile.present? && agent.role != "admin"
-				@users << agent
-			end
-		end
+		# user = User.all
+		@users = User.all
+		# user.each do |agent|
+		# 	if !agent.profile.present? && agent.role != "admin"
+		# 		@users << agent
+		# 	end
+		# end
 	end
 
 	def update

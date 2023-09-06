@@ -1,4 +1,4 @@
-<div class="cont-<%= message.user.id %>">
+<div class="cont-<%= message.user.id %>" id="message-container">
   <div class="message-box msg-<%= message.user.id %> ">
     <%= message.content %></br><span class="time_date"><%= message.created_at.strftime("%I:%M %p") %> | <%= message.created_at.strftime("%d, %b") %>
   </div>

@@ -64,21 +64,26 @@
           <li><a href="/#portfolio">Property</a></li>
           <li><a href="/rooms">Chats</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="/profile">Profile</a></li>
+              <% if current_user.present? && current_user.role == "agent" %>
+                <li class="dropdown"><a href="#"><span>Agents Setting</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                  <ul>
+                    <li><a href="/properties/new">Create Properties</a></li>
+                    <li><a href="/properties">View all properties</a></li>
+                    <li><a href="/sale_properties">Sale Properties</a></li>
+                    <li><a href="#">Deep Drop Down 4</a></li>
+                    <li><a href="#">Deep Drop Down 5</a></li>
+                  </ul>
+                </li>
+              <% else %>
+                <li class="dropdown"><a href="#"><span>Agents</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                </li>
+              <% end %>
+              <li><a href="/profile_about">Bookings</a></li>
+              <li><a href="/security">Security</a></li>
+              <li><a href="/users/sign_out">Logout</a></li>
             </ul>
           </li>
           <li><a href="/#contact">Contact</a></li>

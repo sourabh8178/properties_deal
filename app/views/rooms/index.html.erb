@@ -1,19 +1,9 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 <div class="messaging">
   <div class="inbox_msg">
    <div class="inbox_people">
      <div class="headind_srch">
       <div class="recent_heading">
-        <h4><%= current_user.profile.name.capitalize %></h4>
+        <h4><%= image_tag current_user.profile.profile_image, height: "32px" %><%= current_user.profile.name.capitalize %></h4>
       </div>
       <div class="srch_bar">
         <div class="stylish-input-group">
@@ -40,7 +30,7 @@
   </div>
     <% if @single_room %>
     <div class="mesgs">
-     <div class="msg_history">
+     <div class="msg_history" id="message-container">
         <%= turbo_stream_from @single_room %>
         <% @single_room.messages.group_by {|u| u.created_at.strftime("%a, %d %b %Y")}.each do |messages| %>
           <p class="messagrdate" style="text-align: center;"><%= messages.first %></p>
@@ -203,7 +193,7 @@
 }
 
 .inbox_chat {
-   height: 550px;
+   height: 400px;
    overflow-y: scroll;
 }
 
@@ -242,6 +232,7 @@
    display: block;
    font-size: 12px;
    margin: 8px 0 0;
+   
 }
 
 .received_withd_msg {
@@ -305,7 +296,7 @@
 
 
 .msg_history {
-   height: 516px;
+   height: 400px;
    overflow-y: auto;
 }
 </style>

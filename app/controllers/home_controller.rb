@@ -17,8 +17,12 @@ class HomeController < ApplicationController
   end
 
   def index
-    @properties = Property.order('RANDOM()').limit(6)
-    @agents = User.agents
+    if current_user&.present? && !current_user&.profile.present?
+        redirect_to(profile_path)
+    else
+        @properties = Property.order('RANDOM()').limit(6)
+        @agents = User.agents
+    end
     # @posts = Post.all
   end
 
@@ -67,12 +71,30 @@ class HomeController < ApplicationController
   end
 
   def profile
-    @profile = current_user.profile
+    if current_user.profile.present?
+      @profile = current_user.profile
+    else
+      @profile = Profile.new
+    end
   end
 
   def update_profile
     if current_user.profile.update(profile_params)
       redirect_to(request.referer)
+    end
+  end
+
+  def create_profile
+    if params[:profile_image].present?
+      @profile = Profile.new(profile_image: params[:profile_image], user_id: current_user.id)
+      if @profile.save
+        redirect_to(request.referer)
+      end
+    else
+      @profile = Profile.new(name: params[:name], email: params[:email],mobile_number: params[:mobile_number], user_id: current_user.id, is_complete: true)
+      if @profile.save
+        redirect_to(request.referer)
+      end
     end
   end
 
@@ -85,6 +107,6 @@ class HomeController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:name,:profile_image, :email, :mobile_number, :address, :location, :property_type, :bedrooms, :bathrooms, :parking, :images)
+    params.require(:profile).permit(:name, :profile_image, :email, :mobile_number, :address, :location, :property_type, :bedrooms, :bathrooms, :parking, :images)
   end
 end

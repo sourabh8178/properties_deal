@@ -5,7 +5,7 @@
         <h4 class="card-title mt-0">Property</h4>
       </div>
       <div class="card-body">
-        <%= form_for([:admin, @property]) do |form| %>
+        <%= form_for(@property) do |form| %>
           <div class="form-group">
            <label for="exampleInput1" class="bmd-label-floating"> Name</label>
            <%= form.text_field :name, class: "form-control",id: "exampleInput1"%>
@@ -25,27 +25,19 @@
            <%= form.text_field :price, class: "form-control",id: "exampleInput1" %>
           </div><br>
 
-
           <div class="form-group">
            <label for="exampleInput1" class="bmd-label-floating">Bedrooms</label>
            <%= form.select :bedrooms, [['1','1'],['2','2'],['3','3']],{:prompt => '--  Select Bedroom Numbers --'} , class: "form-control",id: "exampleInput1" %>
           </div><br>
-
 
           <div class="form-group">
            <label for="exampleInput1" class="bmd-label-floating">Bathrooms</label>
            <%= form.select :bathrooms, [['1','1'],['2','2'],['3','3']],{:prompt => '-- Select Bathroom Numbers --'}, class: "form-control",id: "exampleInput1" %>
           </div><br>
 
-
           <div class="form-group">
            <label for="exampleInput1" class="bmd-label-floating">Parking</label>
            <%= form.select :parking, [['1','1'],['2','2'],['3','3']],{:prompt => '--  Select Parking Numbers --'}, class: "form-control",id: "exampleInput1" %>
-          </div><br>
-
-          <div class="form-group">
-           <label for="exampleInput1" class="bmd-label-floating">Agent</label>
-           <%= form.select :user_id, User.agents.map{ |u| [u.email, u.id ]}, {:prompt => '--  Select Agent --'}, class: "form-control" %>
           </div><br>
 
           <div class="form-group">

@@ -15,9 +15,10 @@
     <div class="col-lg-8">
         <div class="right-side-pro-detail border p-3 m-0">
             <div class="row">
-                <div class="col-lg-12">
-                    <span><%= @property.name.capitalize %></span>
-                    <p class="m-0 p-0">Location : <%= @property.location %></p>
+                <div class="col-lg-8">
+                    <span><strong><%= @property.name.capitalize %></strong></span>
+                    <p class="m-0 p-0" style="color: black;">Location : <%= @property.location %></p>
+                    <p class="m-0 p-0" style="color: black;">Status : <%= @property.status_type %></p>
                 </div>
                 <div class="col-lg-12">
                     <p class="m-0 p-0 price-pro">$<%= @property.price %></p>

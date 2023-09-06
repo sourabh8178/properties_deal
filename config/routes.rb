@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'notifications/_notification'
-  get 'feeedbacks/_feedback'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -10,8 +8,9 @@ Rails.application.routes.draw do
   get "show", to: "home#show"
   get "grad", to: "home#grad"
   get "property/:id", to: "home#show"
-  get "profile", to: "home#profile"
+  get "/profile", to: "home#profile"
   patch "profile", to: "home#update_profile"
+  post "profile", to: "home#create_profile"
   get "profile_about", to: "home#profile_about"
   get "security", to: "home#security"
   get "view_all_property", to: "home#view_all_property"
@@ -19,7 +18,7 @@ Rails.application.routes.draw do
   resources :rooms do
     resources :messages
   end
-  get "message", to: "home#message"
+  # get "message", to: "home#message"
   get "/user_chat", to: "rooms#user_chat"
   get "feedbacks", to: "feedbacks#create"
   resources :properties do
