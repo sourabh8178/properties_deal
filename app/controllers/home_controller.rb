@@ -60,6 +60,20 @@ class HomeController < ApplicationController
     
   end
 
+  def password_change
+    if current_user.valid_password?(params[:currentPassword])
+      if (params[:password] == params[:confirmPassword])
+        @users = current_user.update(password: params[:password])
+      else
+        flash[:notice] = "Your password does not match Confirm Password"
+        redirect_to(request.referer)
+      end
+    else
+      flash[:notice] = "Your current password does not match"
+      redirect_to(request.referer)
+    end
+  end
+
   def message
     @single_room = Room.find_by(user_id: current_user.id, sender_id: params[:agent_id].to_i) || Room.find_by(user_id: params[:agent_id].to_i, sender_id: current_user.id)
     if @single_room.present?
@@ -80,6 +94,7 @@ class HomeController < ApplicationController
 
   def update_profile
     if current_user.profile.update(profile_params)
+      flash[:notice] = "Profile updated successfuly."
       redirect_to(request.referer)
     end
   end
@@ -88,11 +103,13 @@ class HomeController < ApplicationController
     if params[:profile_image].present?
       @profile = Profile.new(profile_image: params[:profile_image], user_id: current_user.id)
       if @profile.save
+        flash[:notice] = "Profile created successfuly."
         redirect_to(request.referer)
       end
     else
       @profile = Profile.new(name: params[:name], email: params[:email],mobile_number: params[:mobile_number], user_id: current_user.id, is_complete: true)
       if @profile.save
+        flash[:notice] = "Profile created successfuly."
         redirect_to(request.referer)
       end
     end

@@ -7,7 +7,7 @@
                     <div id="remote_container"></div>
                     <% flash.each do |key, value| %>
                     <div class="alert alert-danger" role="alert">
-                      <%= value %>
+                      <i class="bi bi-exclamation-octagon-fill"></i><%= value %>
                     </div>
                     <% end %>
                       <%= form_for(resource, as: resource_name, url: session_path(resource_name), class:"form-horizontal") do |f| %>
@@ -29,7 +29,7 @@
                             <% end %>
 
                             <div class="actions">
-                              <%= f.submit "Log in", class: "btn btn-primary" %>
+                              <%= f.submit "Log in", class: "btn" %>
                             </div>
                             <span class="user-login">Are You New? Click Here to<%= render "devise/shared/links" %></span>
                       <% end %>
@@ -39,6 +39,23 @@
     </div>
 </div>
 <style>
+    .btn,
+    .btn:hover,
+    .btn:active,
+    .btn:visited,
+    .btn:focus {
+      background-color: #2e8c6e;
+      border-color: #2e8c6e;
+      color: white;
+    }
+    .btn{
+        width: 100%;
+        text-align: center;
+    }
+    .alert{
+        width: 39%;
+        left: 30%;
+    }
   .form-container{
     background-color: rgba(255,255,255,0.9);
     font-family: 'Titillium Web', sans-serif;
@@ -216,3 +233,15 @@
     .form-container .social-links a:nth-child(even){ margin: 0 auto 10px; }
 }
 </style>
+
+<script>
+    $(document).ready(function() {
+      var myDiv = $('.alert-danger');
+
+      if (myDiv.length) {
+        setTimeout(function() {
+          myDiv.fadeOut(2000);
+        }, 3000);
+      }
+    });
+</script>

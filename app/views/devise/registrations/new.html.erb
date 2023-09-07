@@ -31,14 +31,14 @@
                             <label>Role*</label>
                             <%= f.select :role, ["customer", "agent"], {:prompt => '-- Please Select Role --'}, class: "form-control" %><br>
                         </div>
-                        <%= f.submit "Create Account", class: "btn btn-primary" %><br>
+                        <%= f.submit "Create Account", class: "btn" %><br>
                         <span class="user-login">Already Have an Account? Click Here to <a href="/users/sign_in">Login</a></span>
                     <!-- </form> -->
                     <% end %>
                     <div class="social-links">
                         <span>Or Connect With</span>
-                        <a href="#"><i class="fab fa-twitter"></i> twitter</a>
-                        <a href="#"><i class="fab fa-facebook-f"></i> facebook</a>
+                        <!-- <a href="#"><i class="fab fa-twitter"></i> twitter</a> -->
+                        <!-- <a href="#"><i class="fab fa-facebook-f"></i> facebook</a> -->
                     </div>
                 </div>
             </div>
@@ -46,6 +46,19 @@
     </div>
 </div>
 <style>
+    .btn,
+    .btn:hover,
+    .btn:active,
+    .btn:visited,
+    .btn:focus {
+      background-color: #2e8c6e;
+      border-color: #2e8c6e;
+      color: white;
+    }
+    .btn{
+        width: 100%;
+        text-align: center;
+    }
   .form-container{
     background-color: rgba(255,255,255,0.9);
     font-family: 'Titillium Web', sans-serif;

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post "profile", to: "home#create_profile"
   get "profile_about", to: "home#profile_about"
   get "security", to: "home#security"
+  post "/password_change", to: "home#password_change"
   get "view_all_property", to: "home#view_all_property"
   post "/contact", to: "contacts#create"
   resources :rooms do
