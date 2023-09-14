@@ -67,6 +67,98 @@
                   <li><a href="#">Marketing</a></li>
                 </ul>
               </div><!-- End meta bottom -->
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalLong">
+                <%if @property.status_type == "For Rent" %>
+                  Book for Rent 
+                <% else %>
+                  Purchase Now
+                <% end %>
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Invoice</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                            <%= @property.name.capitalize %>
+                      <table class="table table-hover">
+                        <!-- <thead> -->
+                          <!-- <tr> -->
+                            <!-- <th>Product name</th> -->
+                            <!-- <th>Price</th> -->
+                            <!-- <th>Remove</th> -->
+                          <!-- </tr> -->
+                        <!-- </thead> -->
+                        <tbody>
+                          <tr>
+                            <td>Property Type</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><%= @property.status_type %></td>
+                          </tr>
+                        <%= form_for "data", url: "/create-checkout-session" do |form| %>
+                          <% if @property.status_type == "For Rent" %>
+                          <tr>
+                            <td>Months</td>
+                            <td></td>
+                            <th></th>
+                            <td></td>
+                            <td><select  name="for_months" required>
+                              <option>select months</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                              </select>
+                            </td>
+                          </tr>
+                          <% end %>
+                          <tr>
+                            <td>Property Price</td>
+                            <th></th>
+                            <th></th>
+                            <td></td>
+                            <td>&#8377;<%= @property.price %></td>
+                            <%= form.hidden_field :price, value: @property.price %>
+                          </tr>
+                          <tr>
+                            <td>GST(18%)</td>
+                            <th ></th>
+                            <th></th>
+                            <td></td>
+                            <td>&#8377;<%= gst_value(@property.price) %></td>
+                            <%= form.hidden_field :tex, value: gst_value(@property.price) %>
+                          </tr>
+                          <tr class="total" name="total">
+                            <td>Total Price</td>
+                            <th ></th>
+                            <th></th>
+                            <td></td>
+                            <td value="<%= total_price(@property.price) %>">&#8377;<%= total_price(@property.price) %></td>
+                            <%= form.hidden_field :total_price, value: total_price(@property.price) %>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button id="rzp-button1" class="btn btn-warning btn-block btn-lg">Pay now</button>
+                      <!-- <button type="button" class="btn btn-warning">Pay now</button> -->
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             </article><!-- End blog post -->
 
@@ -199,3 +291,11 @@
     newNameInput3.value = "";
   });
 </script>
+
+<style type="text/css">
+  .move_left{
+    left: 200px;
+/*    position: absolute;*/
+    font-size: 14px;
+  }
+</style>

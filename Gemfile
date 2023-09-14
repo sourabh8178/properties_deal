@@ -73,3 +73,5 @@ end
 
 gem "devise", "~> 4.9"
 gem "will_paginate"
+gem 'figaro'
+gem 'razorpay'

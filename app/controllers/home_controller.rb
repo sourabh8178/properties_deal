@@ -116,6 +116,7 @@ class HomeController < ApplicationController
   end
 
   def profile_about
+    @order = current_user.orders
   end
 
   def security
@@ -124,6 +125,6 @@ class HomeController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:name, :profile_image, :email, :mobile_number, :address, :location, :property_type, :bedrooms, :bathrooms, :parking, :images)
+    params.require(:profile).permit(:name, :profile_image, :email, :mobile_number, :address,  :about, :company_name)
   end
 end

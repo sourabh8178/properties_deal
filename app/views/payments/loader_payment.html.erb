@@ -1,0 +1,19 @@
+<H3 class=" text-danger" style="text-align: center; margin-top:50px ;">We are redirecting to the payment page don't reload and back </H3>
+<div style="text-align:center; height: 199px; margin-top: 100px; ">
+	<div class="spinner-grow text-success" role="status" style="height: 91px; width: 91px;">
+	  <span class="sr-only">Loading...</span>
+	</div>
+</div>
+Loading...
+<script>
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const urlValue = urlParams.get('url');
+	var targetUrl = urlValue.replace(/'/g, ''); 
+	var delay = 2000;
+
+	setTimeout(function() {
+	    window.location.href = targetUrl;
+	}, delay);
+    
+</script>

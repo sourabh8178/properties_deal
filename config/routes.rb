@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  resources :payments
   root "home#index"
   get "show", to: "home#show"
   get "grad", to: "home#grad"
@@ -15,7 +16,12 @@ Rails.application.routes.draw do
   get "security", to: "home#security"
   post "/password_change", to: "home#password_change"
   get "view_all_property", to: "home#view_all_property"
+  post "/create-checkout-session", to: "payments#checkout"
+  get "/success", to: "payments#success"
   post "/contact", to: "contacts#create"
+  get "/plans", to: "payments#plans"
+  post "/subscription", to: "payments#subscription"
+  get "/loader", to: "payments#loader_payment"
   resources :rooms do
     resources :messages
   end

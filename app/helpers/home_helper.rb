@@ -9,4 +9,12 @@ module HomeHelper
     local_time = utc_time.in_time_zone(time_zone)
     return local_time.strftime("%B %d, %Y")
 	end
+
+	def total_price(price)
+		return price + (price*18/100)
+	end
+
+	def gst_value(price)
+		return price*18/100
+	end
 end

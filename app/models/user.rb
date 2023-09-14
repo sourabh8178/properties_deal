@@ -10,4 +10,6 @@ class User < ApplicationRecord
 
   has_many :messages
   has_many :feedbacks
+  has_many :orders
+  has_one :sub_plan
 end
