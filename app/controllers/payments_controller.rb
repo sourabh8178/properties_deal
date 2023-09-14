@@ -13,7 +13,7 @@ class PaymentsController < ApplicationController
 
       request = Net::HTTP::Post.new(url)
       request["Content-Type"] = "application/json"
-      request["Authorization"] = "Basic cnpwX3Rlc3RfTkkxVzBHVmE5Mm9STTA6WkFONWpFZUxnTlRxbVI3TDZkSWJCNXdY"
+      request["Authorization"] = ""
       request.body = JSON.dump({
         "amount": params[:amount].to_i*100,
         "currency": "INR",
@@ -55,7 +55,7 @@ class PaymentsController < ApplicationController
 
     request = Net::HTTP::Post.new(url)
     request["Content-Type"] = "application/json"
-    request["Authorization"] = "Basic cnpwX3Rlc3RfTkkxVzBHVmE5Mm9STTA6WkFONWpFZUxnTlRxbVI3TDZkSWJCNXdY"
+    request["Authorization"] = ""
     request.body = JSON.dump({
       "amount": params[:data][:total_price].to_i*100,
       "currency": "INR",
@@ -95,7 +95,7 @@ class PaymentsController < ApplicationController
     https.use_ssl = true
 
     request = Net::HTTP::Get.new(url)
-    request["Authorization"] = "Basic cnpwX3Rlc3RfTkkxVzBHVmE5Mm9STTA6WkFONWpFZUxnTlRxbVI3TDZkSWJCNXdY"
+    request["Authorization"] = ""
 
     response = https.request(request)
     @payment = JSON.parse(response.read_body)
