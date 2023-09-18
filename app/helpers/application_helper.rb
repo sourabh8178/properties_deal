@@ -22,4 +22,9 @@ module ApplicationHelper
     when 'alert' then "alert alert-error"
     end
   end
+
+  def notification
+    notification =  Notification.where(user_id: current_user.id) + Notification.where(sender_id: current_user.id)
+    return notification.count
+  end
 end

@@ -88,12 +88,28 @@
             </ul>
           </li>
           <li><a href="/#contact">Contact</a></li>
+          <li>
+            <div class="icon-badge" id="bell"><i class="bi bi-bell-fill" style="color: white;"></i><span class="badge"><%= notification %></span></div>
+            <div class="notifications" id="box">
+                <h2>Notifications - <span>2</span></h2>
+                <div class="notifications-item"> <img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
+                    <div class="text">
+                        <h4>Samso aliao</h4>
+                        <p>Samso Nagaro Like your home work</p>
+                    </div>
+                </div>
+                <div class="notifications-item"> <img src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt="img">
+                    <div class="text">
+                        <h4>John Silvester</h4>
+                        <p>+20 vista badge earned</p>
+                    </div>
+                </div>
+            </div>
+          </li>
         </ul>
-      </nav><!-- .navbar -->
-
+      </nav>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-
     </div>
   </header><!-- End Header -->
   
@@ -159,10 +175,6 @@
         &copy; Copyright <strong><span>Sourabh world</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/impact-bootstrap-business-website-template/ -->
         Designed by <a href="/">Sourabhkumar</a>
       </div>
     </div>
@@ -187,4 +199,63 @@
 </html>
 
 
-
+<style type="text/css">
+  .icon-badge {
+    position: relative;
+    display: inline-block;
+  }
+  .badge {
+    position: absolute;
+    top: 11px;
+    right: -8px;
+    color: red !important;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  .notifications {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 999; /* Ensure it appears above other content */
+    }
+    .icon-badge{cursor: pointer;margin-right: 50px;line-height: 60px}
+    .icon-badge{cursor: pointer;}
+    .icon:hover{opacity: .7}.logo{flex: 1;margin-left: 50px;color: #eee;font-size: 20px;font-family: monospace}
+    .notifications{width: 300px;height: 0px;opacity: 0; right: 0px;position: absolute;top: 63px;right: 62px;border-radius: 5px 0px 5px 5px;background-color: #fff;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)}
+    .notifications h2{font-size: 14px;padding: 10px;border-bottom: 1px solid #eee;color: #999}
+    .notifications h2 span{color: #f00}
+    .notifications-item{display: flex;border-bottom: 1px solid #eee;padding: 6px 9px;margin-bottom: 0px;cursor: pointer}
+    .notifications-item:hover{background-color: #eee}
+    .notifications-item img{display: block;width: 50px;height: 50px;margin-right: 9px;border-radius: 50%;margin-top: 2px}
+    .notifications-item .text h4{color: #777;font-size: 16px;margin-top: 3px}
+    .notifications-item .text p{color: #aaa;font-size: 12px}
+    @media (max-width: 768px) {
+      .notifications {
+            display: none;
+        }
+        .show-notifications-button {
+            display: block; /* Display a button to show notifications */
+        }
+    }
+</style>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var down = false;
+    $('#bell').click(function(e){
+      var color = $(this).text();
+      if(down){
+        $('#box').css('height','0px');
+        $('#box').css('opacity','0');
+        down = false;
+      }else{
+        $('#box').css('height','auto');
+        $('#box').css('opacity','1');
+        down = true;
+        }
+      });
+  });
+</script>

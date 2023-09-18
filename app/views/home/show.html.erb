@@ -40,8 +40,8 @@
               <div class="meta-top">
                 <ul>
                   <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#"><%= property_user(@property.user_id) %></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="2020-01-01"><%= convert_time(@property.created_at)%></time></a></li>
-                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#"><%= @property.feedbacks.count%> Comments</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="#"><time datetime="2020-01-01"><%= convert_time(@property.created_at) %></time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#"><%= @property.status_type %> </a></li>
                 </ul>
               </div><!-- End meta top -->
 
@@ -68,14 +68,7 @@
                 </ul>
               </div><!-- End meta bottom -->
               <!-- Button trigger modal -->
-              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalLong">
-                <%if @property.status_type == "For Rent" %>
-                  Book for Rent 
-                <% else %>
-                  Purchase Now
-                <% end %>
-              </button>
-
+              <a href="/place_order/<%= @property.id %>" class="btn btn-warning">Book now </a>
               <!-- Modal -->
               <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">

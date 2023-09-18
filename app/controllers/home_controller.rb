@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-
+  before_action :check_profile
   def grad
     @agents = User.agents
   end

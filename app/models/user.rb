@@ -12,4 +12,5 @@ class User < ApplicationRecord
   has_many :feedbacks
   has_many :orders
   has_one :sub_plan
+  has_many :notifications
 end

@@ -1,5 +1,5 @@
 class PropertiesController < ApplicationController
-  # before_action :check_profile_for_agent
+  before_action :check_profile_for_agent
 
   def index
     @properties = current_user.properties

@@ -1,48 +1,10 @@
 class PaymentsController < ApplicationController
 
-  def subscription
-    require "uri"
-      require "json"
-      require "net/http"
-
-      url = URI("https://api.razorpay.com/v1/payment_links")
-      time = (Time.now + 15.minute).to_i
-
-      https = Net::HTTP.new(url.host, url.port)
-      https.use_ssl = true
-
-      request = Net::HTTP::Post.new(url)
-      request["Content-Type"] = "application/json"
-      request["Authorization"] = ""
-      request.body = JSON.dump({
-        "amount": params[:amount].to_i*100,
-        "currency": "INR",
-        "accept_partial": false,
-        "expire_by": 2094512165,
-        "reference_id": "order#" + SecureRandom.hex(8),
-        "description": "Payment for subsciption",
-        "customer": {
-          "name": current_user.profile.name,
-          "contact": current_user.profile.mobile_number,
-          "email": current_user.profile.email
-        },
-        "notify": {
-          "sms": true,
-          "email": true
-        },
-        "reminder_enable": true,
-        "notes": {
-          "policy_name": "Subscription"
-        },
-        "callback_url":  "#{ENV['HOST']}/success?type='#{params["type"]}'&limit='#{params["limit"].to_i}'&amount='#{params["amount"].to_i}'",
-        "callback_method": "get"
-      })
-      response = https.request(request)
-      @url = JSON.parse(response.read_body);
-      redirect_to "/loader?url='#{@url["short_url"]}'"
+  def place_order
+    @property = Property.find_by(id: params[:id])
   end
 
-  def checkout 
+  def subscription
     require "uri"
     require "json"
     require "net/http"
@@ -55,12 +17,53 @@ class PaymentsController < ApplicationController
 
     request = Net::HTTP::Post.new(url)
     request["Content-Type"] = "application/json"
-    request["Authorization"] = ""
+    request["Authorization"] = ENV['BASE']
+    request.body = JSON.dump({
+      "amount": params[:amount].to_i*100,
+      "currency": "INR",
+      "accept_partial": false,
+      "expire_by": 2094512165,
+      "reference_id": "order#" + SecureRandom.hex(8),
+      "description": "Payment for subsciption",
+      "customer": {
+        "name": current_user.profile.name,
+        "contact": current_user.profile.mobile_number,
+        "email": current_user.profile.email
+      },
+      "notify": {
+        "sms": true,
+        "email": true
+      },
+      "reminder_enable": true,
+      "notes": {
+        "policy_name": "Subscription"
+      },
+      "callback_url":  "#{ENV['HOST']}/success?type='#{params["type"]}'&limit='#{params["limit"].to_i}&amount=#{params["amount"].to_i}",
+      "callback_method": "get"
+    })
+    response = https.request(request)
+    @url = JSON.parse(response.read_body);
+    redirect_to "/loader?url='#{@url["short_url"]}'"
+  end
+
+  def checkout
+    require "uri"
+    require "json"
+    require "net/http"
+
+    url = URI("https://api.razorpay.com/v1/payment_links")
+    time = (Time.now + 15.minute).to_i
+
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+
+    request = Net::HTTP::Post.new(url)
+    request["Content-Type"] = "application/json"
+    request["Authorization"] = ENV['BASE']
     request.body = JSON.dump({
       "amount": params[:data][:total_price].to_i*100,
       "currency": "INR",
       "accept_partial": false,
-      "first_min_partial_amount": 100,
       "expire_by": 2094512165,
       "reference_id": "order#" + SecureRandom.hex(8),
       "description": "Payment for policy no #23456",
@@ -77,7 +80,7 @@ class PaymentsController < ApplicationController
       "notes": {
         "policy_name": "Jeevan Bima"
       },
-      "callback_url":  "#{ENV['HOST']}/success",
+      "callback_url":  "#{ENV['HOST']}/success?price=#{params["data"]["price"]}&property_name=#{params["data"]["property_name"]}&gst=#{params["data"]["gst"]}",
       "callback_method": "get"
     })
     response = https.request(request)
@@ -95,7 +98,7 @@ class PaymentsController < ApplicationController
     https.use_ssl = true
 
     request = Net::HTTP::Get.new(url)
-    request["Authorization"] = ""
+    request["Authorization"] = ENV['BASE']
 
     response = https.request(request)
     @payment = JSON.parse(response.read_body)
@@ -108,6 +111,14 @@ class PaymentsController < ApplicationController
       subscriptions.save
     end
     @order = Order.new
+    if @payment["notes"]["policy_name"] == "Subscription"
+      @order.order_type = "subscription"
+    else
+      @order.order_type = "nonsubscription"
+    end
+    @order.product_amount = params[:price]
+    @order.product_name = params[:property_name]
+    @order.gst = params[:gst]
     @order.user_id = current_user.id
     @order.order_id = @payment["order_id"]
     @order.amount = @payment["amount"]/100
@@ -126,6 +137,10 @@ class PaymentsController < ApplicationController
 
   def loader_payment
     
+  end
+
+  def order_view
+    @order = Order.find_by(id: params[:id])
   end
 
 end

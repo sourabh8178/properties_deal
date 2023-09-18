@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get "/plans", to: "payments#plans"
   post "/subscription", to: "payments#subscription"
   get "/loader", to: "payments#loader_payment"
+  get "/place_order/:id", to: "payments#place_order"
+  get "/order/:id", to: "payments#order_view"
   resources :rooms do
     resources :messages
   end

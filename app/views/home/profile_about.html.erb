@@ -8,13 +8,11 @@
             <!-- Billing card 1-->
             <div class="card h-100 border-start-lg border-start-primary">
                 <div class="card-body">
-                    <div class="small text-muted">Current plan bill</div>
+                    <div class="small text-muted">Your plan</div>
                     <% if current_user.sub_plan.present? %>
                     <div class="h3">$<%= current_user.sub_plan.amount %></div>
                     Your plan amount
                     <% else %>
-                    <div class="h3">$<%= current_user.sub_plan.amount %></div>
-                    Your last plan
                     <a class="text-arrow-icon small" href="/plans">
                         you dont have any acitve plan
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -77,14 +75,14 @@
                     </thead>
                     <tbody>
                         <% @order.each do |order| %>
-                        <tr>
-                            <td>#<%= order.order_id%></td>
-                            <td><%= convert_time(order.created_at)%></td>
-                            <td>&#8377;<%= order.amount %></td>
-                            <% if order.status == "captured" %>
-                            <td><span class="badge bg-success">Paid</span></td>
-                            <% end %>
-                        </tr>
+                          <tr>
+                              <td><a href="/order/<%= order.id %>">#<%= order.order_id%></a></td>
+                              <td><%= convert_time(order.created_at)%></td>
+                              <td>&#8377;<%= order.amount %></td>
+                              <% if order.status == "captured" %>
+                              <td><span class="badge bg-success">Paid</span></td>
+                              <% end %>
+                          </tr>
                         <% end %>
                     </tbody>
                 </table>

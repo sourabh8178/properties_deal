@@ -1,0 +1,111 @@
+<section style="background-color: #eee;">
+  <!-- <div class="container"> -->
+    <!-- <div class="card"> -->
+      <!-- <div class="card-body"> -->
+        <div class="row d-flex justify-content-center pb-5">
+          <div class="col-md-7 col-xl-5 mb-4 mb-md-0">
+            <div class="py-4 d-flex flex-row">
+              <!-- <h5><span class="far fa-check-square pe-2"></span><b>ELIGIBLE</b> |</h5> -->
+              <!-- <span class="ps-2">Pay</span> -->
+            </div>
+            <h4 class="text-success">$<%= @property.price %></h4>
+            <h4><%= @property.name.capitalize %></h4>
+            <div class="d-flex pt-2">
+              <div>
+                <p>
+                  <b>Insurance Responsibility <span class="text-success">$71.76</span></b>
+                </p>
+              </div>
+              <div class="ms-auto">
+                <p class="text-primary">
+                  <i class="fas fa-plus-circle text-primary pe-1"></i>Add insurance card
+                </p>
+              </div>
+            </div>
+            <p>
+              Insurance claims and all necessary dependencies will be submitted to your
+              insurer for the coverred portion of this order
+            </p>
+            <div class="rounded d-flex" style="background-color: #f8f9fa;">
+              <div class="p-2">Aetna-Open Access</div>
+              <div class="ms-auto p-2">OAP</div>
+            </div>
+            <hr />
+            <div class="pt-2">
+              <div class="d-flex pb-2">
+                <div>
+                  <p>
+                    <b>Patient Balance <span class="text-success">$13.24</span></b>
+                  </p>
+                </div>
+                <div class="ms-auto">
+                  <p class="text-primary">
+                    <i class="fas fa-plus-circle text-primary pe-1"></i>Add payment card
+                  </p>
+                </div>
+              </div>
+              <p>
+                This is an estimate for the portion of your order (not covered by
+                insurance) due today . once insurance finalizes their review refunds
+                and/or balances will reconcile automatically.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-5 col-xl-4 offset-xl-1">
+            <!-- <div class="py-4 d-flex justify-content-end"> -->
+              <!-- <h6><a href="#!">Cancel and return to website</a></h6> -->
+            <!-- </div> -->
+            <%= form_for "data", url: "/create-checkout-session" do |form| %>
+	            <div class="rounded d-flex flex-column p-2" style="background-color: #f8f9fa;">
+	              <div class="p-2 me-3">
+	                <h4>Order Recap</h4>
+	              </div>
+	              <div class="p-2 d-flex">
+	                <div class="col-8"> Price</div>
+	                <div class="ms-auto">&#8377;<%= @property.price %></div>
+	                <%= form.hidden_field :price, value: @property.price %>
+	                <%= form.hidden_field :property_name, value: @property.name %>
+	              </div>
+	              <div class="p-2 d-flex">
+	                <div class="col-8">Platform fee(2%)</div>
+	                <div class="ms-auto">&#8377;0.00</div>
+	              </div>
+	              <div class="p-2 d-flex">
+	                <div class="col-8">GST( 18% )</div>
+	                <div class="ms-auto">+ &#8377;<%= gst_value(@property.price) %></div>
+	                <%= form.hidden_field :gst, value: gst_value(@property.price) %>
+	              </div>
+	              <% if @property.status_type == "For Rent" %>
+	              	<div class="p-2 d-flex">
+		                <div class="col-8">Rent</div>
+		                <div class="ms-auto">One Month Rent</div>
+		              </div>
+	              <% end %>
+	              <div class="border-top px-2 mx-2"></div>
+	              <div class="border-top px-2 mx-2"></div>
+	              <div class="p-2 d-flex pt-3">
+	                <div class="col-8">Insurance Responsibility</div>
+	                <div class="ms-auto"><b>&#8377;71.76</b></div>
+	              </div>
+	              <div class="p-2 d-flex">
+	                <div class="col-8">
+	                  Patient Balance <span class="fa fa-question-circle text-dark"></span>
+	                </div>
+	                <div class="ms-auto"><b>&#8377;71.76</b></div>
+	              </div>
+	              <div class="border-top px-2 mx-2"></div>
+	              <div class="p-2 d-flex pt-3">
+	                <div class="col-8"><b>Total</b></div>
+	                <div class="ms-auto"><b class="text-success">&#8377;<%= total_price(@property.price) %></b></div>
+	                <%= form.hidden_field :total_price, value: total_price(@property.price) %>
+	              </div>
+	              <button value="Proceed to payment" class="btn btn-primary btn-block btn-lg">pay now</button>
+	            </div>
+	          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
