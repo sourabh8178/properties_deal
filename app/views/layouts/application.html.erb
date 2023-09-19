@@ -89,7 +89,7 @@
           </li>
           <li><a href="/#contact">Contact</a></li>
           <li>
-            <div class="icon-badge" id="bell"><i class="bi bi-bell-fill" style="color: white;"></i><span class="badge"><%= notification %></span></div>
+            <div class="icon-badge" id="bell"><i class="bi bi-bell-fill" style="color: white;"></i><span class="badge"><%if current_user.notifications.unread.present? %><%= notification %><% end %></span></div>
             <div class="notifications" id="box">
                 <h2>Notifications - <span>2</span></h2>
                 <div class="notifications-item"> <img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">

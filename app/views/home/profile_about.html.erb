@@ -80,7 +80,7 @@
                               <td><%= convert_time(order.created_at)%></td>
                               <td>&#8377;<%= order.amount %></td>
                               <% if order.status == "captured" %>
-                              <td><span class="badge bg-success">Paid</span></td>
+                              <td style="color: green;"><strong>Paid</strong></span></td>
                               <% end %>
                           </tr>
                         <% end %>
