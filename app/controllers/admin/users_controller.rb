@@ -37,7 +37,7 @@ class Admin::UsersController < ApplicationController
 	def destroy
     @user.delete    
     respond_to do |format|
-      format.html { redirect_to admin_users_path, notice: "Picture was successfully destroyed." }
+      format.html { redirect_to admin_users_path, notice: "Successfully destroy." }
       format.json { head :no_content }
     end
   end

@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row"> -->
   <div class="col-md-12">
     <div class="card card-plain">
       <div class="card-header card-header-primary">
@@ -70,6 +70,12 @@
       border-color: #2e8c6e;
       color: white;
   }
+  .alert{
+    top: 6px;
+    width: 38%;
+    left: 28%;
+    text-align: center;
+  }
 </style>
 <script>
 	function myFunction() {
@@ -99,7 +105,7 @@
 
   if (myDiv.length) {
     setTimeout(function() {
-      myDiv.hide();
+      myDiv.fadeOut(2000);
     }, 3000);
   }
 });

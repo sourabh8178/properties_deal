@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :check_profile
+  # before_action :check_profile
   def grad
     @agents = User.agents
   end
@@ -86,7 +86,7 @@ class HomeController < ApplicationController
 
   def profile
     if current_user.profile.present?
-      @profile = current_user.profile
+      @profile_user = current_user.profile
     else
       @profile = Profile.new
     end
@@ -107,7 +107,7 @@ class HomeController < ApplicationController
         redirect_to(request.referer)
       end
     else
-      @profile = Profile.new(name: params[:name], email: params[:email],mobile_number: params[:mobile_number], user_id: current_user.id, is_complete: true)
+      @profile = Profile.new(name: params[:name], email: params[:email],mobile_number: params[:mobile_number], user_id: current_user.id, is_complete: true, address: params["address"], about: params["about"], company_name: params["company_name"])
       if @profile.save
         flash[:notice] = "Profile created successfuly."
         redirect_to(request.referer)

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "property/:id", to: "home#show"
   get "/profile", to: "home#profile"
   patch "profile", to: "home#update_profile"
-  post "profile", to: "home#create_profile"
+  post "profile", to: "home#create_profile", as: "profile_user"
   get "profile_about", to: "home#profile_about"
   get "security", to: "home#security"
   post "/password_change", to: "home#password_change"

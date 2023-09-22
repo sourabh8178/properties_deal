@@ -13,9 +13,10 @@
             <div class="card mb-4 mb-xl-0">
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
-                    <%= form_with(model: @profile, local: true)  do  |f|%>
-                    <% if @profile.present? && @profile.profile_image %>
-                      <%= image_tag @profile&.profile_image, class:"img-account-profile rounded-circle mb-2" %>
+                    <%= form_with(model: @profile_user, local: true)  do  |f|%>
+
+                    <% if @profile_user.present? && @profile_user.profile_image.present? %>
+                      <%= image_tag @profile_user&.profile_image, class:"img-account-profile rounded-circle mb-2" %>
                     <% end %>
                     <%= f.file_field :profile_image, required: true %>
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
@@ -29,7 +30,7 @@
             <div class="card mb-4">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
-                	<%= form_with(model: @profile, local: true, html: { class: 'profile_form', id: "profile_form" })  do  |f|%>
+                  <%= form_with(model: @profile_user, local: true, html: { class: 'profile_form', id: "profile_form" })  do  |f|%>
                       <div class="mb-3">
                           <label class="small mb-1" for="inputUsername">Name (how your name will appear to other users on the site)</label>
                           <%= f.text_field :name, class:"form-control", placeholder:"Enter your first name", required: true %>

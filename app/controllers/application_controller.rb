@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   layout :set_layout
   def after_sign_in_path_for(resource)
-    resource.is_admin? ? admin_root_path : root_path
+    if resource.role == "admin"
+    (resource.role == "admin") ? admin_root_path : root_path
+    else
+      (resource.profile.present? == false) ? "/profile" : root_path
+    end
   end
   def user_admin
     if request.fullpath.split("/")[1] == "admin"
@@ -16,7 +20,7 @@ class ApplicationController < ActionController::Base
     end
   end
   def authentication_admin!
-    unless current_user.is_admin?
+    unless current_user.role == "admin"
       flash[:alert] = "You are not authorized to perform this action."
       redirect_to(request.referrer || root_path)
     end
@@ -25,7 +29,7 @@ class ApplicationController < ActionController::Base
   def check_profile
     if current_user&.present? && current_user.role != "admin"
       if !current_user&.profile.present? || current_user&.profile&.is_complete == false
-        redirect_to(profile_new_path)
+        redirect_to(profile_path)
       end
     end
   end
