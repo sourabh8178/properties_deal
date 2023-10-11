@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get "/place_order/:id", to: "payments#place_order"
   get "/order/:id", to: "payments#order_view"
   get "/refund", to: "payment#refund"
+  get "/notif_read/:id", to: "notifications#notif_read"
   resources :rooms do
     resources :messages
   end

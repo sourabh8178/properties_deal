@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
     if resource.role == "admin"
     (resource.role == "admin") ? admin_root_path : root_path
     else
+      Notification.create(user_id: current_user.id, message: "Welcome back to our website")
       (resource.profile.present? == false) ? "/profile" : root_path
     end
   end

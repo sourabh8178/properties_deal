@@ -35,18 +35,20 @@
                           <label class="small mb-1" for="inputUsername">Name (how your name will appear to other users on the site)</label>
                           <%= f.text_field :name, class:"form-control", placeholder:"Enter your first name", required: true %>
                       </div>
-                      <div class="row gx-3 mb-3">
-                          <!-- Form Group (organization name)-->
-                          <div class="col-md-6">
-                              <label class="small mb-1" for="inputOrgName">Organization name</label>
-                              <%= f.text_field :company_name, class:"form-control", placeholder:"Enter your organization name", required: true %>
-                          </div>
+                      <% if current_user.role != "admin" %>
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (organization name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputOrgName">Organization name</label>
+                                <%= f.text_field :company_name, class:"form-control", placeholder:"Enter your organization name", required: true %>
+                            </div>
+                      <% end %>
 
-                          <div class="col-md-6">
-                              <label class="small mb-1" for="inputLocation">Location</label>
-                              <%= f.text_field :address, class:"form-control", placeholder:"Enter your location", required: true%>
-                          </div>
-                      </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">Location</label>
+                                <%= f.text_field :address, class:"form-control", placeholder:"Enter your location", required: true%>
+                            </div>
+                        </div>
                       <div class="row gx-3 mb-3">
                         <div class="col-md-6">
                             <label class="small mb-1" for="inputEmailAddress">Email address</label>
