@@ -88,22 +88,25 @@
           <li><a href="/rooms">Chats</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="/#contact">Contact</a></li>
-          <li>
-            <div class="icon-badge" id="bell"><i class="bi bi-bell-fill" style="color: white;"></i><span class="badge"><%if current_user&.notifications&.unread.present? %><%= notification %><% end %></span></div>
-            <div class="notifications" id="box">
-                <h2>Your Feeds</span></h2>
-                <% current_user.notifications.reverse_each do |notif| %>
-                  <div class="notifications-item <%= 'unread' unless notif.status == "read" %>"> <img src="https://cdn-icons-png.flaticon.com/512/4786/4786795.png" alt="img">
-                      <div class="text">
-                          <h4></h4>
-                  <a href="/notif_read/<%= notif.id %>">
-                          <h6><%= notif.message %></h6>
-                  </a>
-                      </div>
-                  </div>
-                <% end %>
-            </div>
-          </li>
+          <% if current_user.present? %>
+            <li>
+              <div class="icon-badge" id="bell"><i class="bi bi-bell-fill" style="color: white;"></i><span class="badge"><%if current_user&.notifications&.unread.present? %><%= notification %><% end %></span></div>
+              <div class="notifications" id="box">
+                  <h2>Your Feeds<span style=" left: 190px;position: relative; top: -14px"><a href="/marked_as_read" style="color: blue; text-decoration: none; color: red;">Marked as read</a></span></h2>
+                  <% current_user&.notifications&.reverse_each do |notif| %>
+                    <div class="notifications-item <%= 'unread' unless notif.status == "read" %>"> <%= image_tag(image_notification(notif), alt: 'notif') %> <%#= image_tag %>
+                      <!-- <img src="/app/assets/images/welcome.png" alt="img"> -->
+                        <div class="text">
+                            <h4></h4>
+                    <a href="/notif_read/<%= notif.id %>">
+                            <h6><%= notif.message %></h6>
+                    </a>
+                        </div>
+                    </div>
+                  <% end %>
+              </div>
+            </li>
+          <% end %>
         </ul>
       </nav>
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -232,14 +235,14 @@
     .notifications-item .text h4{color: #777;font-size: 16px;margin-top: 3px}
     .notifications-item .text p{color: #aaa;font-size: 12px}
     .notifications-item.unread {
-      background-color: #eeeee4;
+      background-color: #cbf5f1;
       font-weight: bold;
     }
     .notifications-item.read {
       color: black !important;
       font-weight: bold;
     }
-    h6{color: black;font-weight: 20px;}
+    h6{color: #06453c;font-weight: 20px;}
     @media (max-width: 768px) {
       .notifications {
             display: none;

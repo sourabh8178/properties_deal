@@ -17,4 +17,18 @@ module HomeHelper
 	def gst_value(price)
 		return price*18/100
 	end
+
+	def image_notification(notif)
+		if notif.name == "profile"
+			return '/profile_update.png'
+		elsif notif.name == "security"
+			return '/security.png'
+		elsif notif.name == "promotions"
+			return '/promo.jpeg'
+		elsif notif.name == "welcome"
+			return '/welcome.png'
+		else
+			return '/def_notif.png'
+		end
+	end
 end

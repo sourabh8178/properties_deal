@@ -94,6 +94,7 @@ class HomeController < ApplicationController
 
   def update_profile
     if current_user.profile.update(profile_params)
+      Notification.create(name: "profile", user_id: current_user.id, message: "Profile updated successfuly")
       flash[:notice] = "Profile updated successfuly."
       redirect_to(request.referer)
     end
