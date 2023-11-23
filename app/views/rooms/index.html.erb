@@ -353,4 +353,8 @@
     }
   });
 }
+
+$('#exampleModalCenter').on('show.bs.modal', function (e) {
+    $(this).data('bs.modal')._config.backdrop = false;
+  });
 </script>
